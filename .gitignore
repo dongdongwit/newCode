@@ -1,0 +1,51 @@
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.factorypath
+.settings
+.classpath
+.project
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### mac
+.DS_Store
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/docker/kbqa/
+/local-debug
+/docker/docker-compose.yml
+src/main/resources/download-files
+
+.mvn
+mvnw
+mvnw.cmd
+
+target
+
+### war and tar
+*.war
+*.tar.gz
+
+### excel
+*.xlsx
+*.xls
+
+log
+*.log
+*.log.0
+*.lck
