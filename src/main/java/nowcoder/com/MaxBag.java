@@ -1,4 +1,4 @@
-package code.niuke.com;
+package nowcoder.com;
 
 /**
  * 0-1背包问题

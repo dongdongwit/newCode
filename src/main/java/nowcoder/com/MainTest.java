@@ -1,4 +1,4 @@
-package code.niuke.com;
+package nowcoder.com;
 
 import java.util.Arrays;
 

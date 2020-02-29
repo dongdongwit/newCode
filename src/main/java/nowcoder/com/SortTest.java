@@ -1,10 +1,10 @@
-package code.niuke.com;
+package nowcoder.com;
 import java.util.Arrays;
 
 /**
  * 常用排序算法的实现方案
  */
-public class sortTest {
+public class SortTest {
     // 冒泡排序，：每个元素都和剩下方向的元素比较一次
     public void bubbleSort(int[] array) {
         int t = 0;
@@ -139,7 +139,7 @@ public class sortTest {
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         int[] array = { 37, 47, 23, 100, 19, 56, 56, 99, 9 };
-        sortTest st = new sortTest();
+        SortTest st = new SortTest();
         // st.bubbleSort(array);
         // st.selectSort(array);
         // st.insertionSort(array);
