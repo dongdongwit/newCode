@@ -35,6 +35,7 @@ public class MaxBag {
                     maxValue[i][j - 1] = (weight[i] <= j ? value[i] : 0);//实现上一个网格的初始化
                 } else {
                     int topValue = maxValue[i - 1][j - 1];  // 上一个网格的值
+                    //当前最大值
                     int thisValue = (weight[i] <= j        // 当前商品的价值 + 剩余空间的价值
                             ? (weight[i] < j ? value[i] + maxValue[i - 1][j - weight[i]] : value[i])//此处反应了状态转移
                             : topValue);

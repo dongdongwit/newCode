@@ -18,6 +18,55 @@ public class sortTest {
                 }
     }
 
+    //归并排序：先对数组均分成两部分，递归直到子序列长度<=2;对子序列合并，最终完成结果的输出
+    public void mergeSort(int[] data, int left, int right) {
+        if (left >= right)
+            return;
+        // 找出中间索引
+        int center = (left + right) / 2;
+        // 对左边数组进行递归
+        mergeSort(data, left, center);
+        // 对右边数组进行递归
+        mergeSort(data, center + 1, right);
+        // 合并
+        merge(data, left, right);
+    }
+
+    private void merge(int[] data, int leftBeginId, int rightEndId) {
+        if (leftBeginId >= rightEndId)
+            return;
+        // 找出中间索引
+        int centerId = (leftBeginId + rightEndId) / 2;
+        // 临时数组
+        int[] result = new int[data.length];
+        // 右数组第一个元素索引
+        int rightId = centerId + 1;
+        // third 记录临时数组的索引
+        int leftId = leftBeginId;
+        // 缓存左数组第一个元素的索引
+        int resultId = leftBeginId;
+        while (leftId <= centerId && rightId <= rightEndId) {
+            // 从两个数组中取出最小的放入临时数组
+            if (data[leftId] <= data[rightId]) {
+                result[resultId++] = data[leftId++];
+            } else {
+                result[resultId++] = data[rightId++];
+            }
+        }
+        // 剩余部分依次放入临时数组（实际上两个while只会执行其中一个）
+        while (rightId <= rightEndId) {
+            result[resultId++] = data[rightId++];
+        }
+        while (leftId <= centerId) {
+            result[resultId++] = data[leftId++];
+        }
+        // 将临时数组中的内容拷贝回原数组中
+        // （原left-right范围的内容被复制回原数组）
+        while (leftBeginId <= rightEndId) {
+            data[leftBeginId] = result[leftBeginId++];
+        }
+    }
+
     // 选择排序
     public void selectSort(int[] array) {
         int t = 0;
@@ -60,7 +109,14 @@ public class sortTest {
         quickSort(array, p_pos + 1, high);// 排序右半部分
     }
 
-    public int partition(int []array,int lo,int hi){
+    /**
+     * 固定切分点key，调整array值的顺序，使得key都大于左边的值小于右边的值--升序
+     * @param array
+     * @param lo
+     * @param hi
+     * @return
+     */
+    private int partition(int []array,int lo,int hi){
         //固定的切分方式
         int key=array[lo];
         while(lo<hi){
@@ -87,7 +143,9 @@ public class sortTest {
         // st.bubbleSort(array);
         // st.selectSort(array);
         // st.insertionSort(array);
-        st.quickSort(array, 0, array.length - 1);
+//        st.quickSort(array, 0, array.length - 1);
+        System.out.println("排序前：" + Arrays.toString(array));
+        st.mergeSort(array, 0, array.length - 1);
         System.out.println("排序后：" + Arrays.toString(array));
     }
 }
