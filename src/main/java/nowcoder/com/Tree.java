@@ -3,11 +3,42 @@ package nowcoder.com;
 import java.util.*;
 
 public class Tree {
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
         TreeNode(int x) { val = x; }
+    }
+
+    /**
+     *输入一颗二叉树的根节点和一个整数，打印出二叉树中结点值的和为输入整数的所有路径。
+     * 路径定义为从树的根结点开始往下一直到叶结点所经过的结点形成一条路径。
+     * (注意: 在返回值的list中，数组长度大的数组靠前)
+     */
+    public ArrayList<ArrayList<Integer>> FindPath(TreeNode root, int target) {
+        ArrayList<Integer> pathList = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> resultList = new ArrayList<>();
+        if (root == null) {
+            return resultList;
+        }
+        if (root.val > target) {
+            return resultList;
+        }
+        pathList.add(root.val);
+        if (root.val == target) {
+            resultList.add(pathList);
+        }
+        ArrayList<ArrayList<Integer>> leftResult = FindPath(root.left, target - root.val);
+        if (! leftResult.isEmpty()) {
+            leftResult.forEach(leftPath -> leftPath.add(root.val));
+            resultList.addAll(leftResult);
+        }
+        ArrayList<ArrayList<Integer>> rightResult = FindPath(root.right, target - root.val);
+        if (! rightResult.isEmpty()) {
+            rightResult.forEach(rightPath -> rightPath.add(root.val));
+            resultList.addAll(rightResult);
+        }
+        return resultList;
     }
 
     /**
@@ -104,15 +135,59 @@ public class Tree {
         return root;
     }
 
+    /**
+     * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。
+     *
+     */
+    public TreeNode Convert(TreeNode pRootOfTree) {
+        return getDoubleList(getInorder(pRootOfTree));
+    }
+    //中序遍历，在list中按遍历顺序保存
+    private ArrayList<TreeNode> getInorder(TreeNode root) {
+        ArrayList<TreeNode> inorder = new ArrayList<>();
+        if (root == null) {
+            return inorder;
+        }
+        inorder.addAll(getInorder(root.left));
+        inorder.add(root);
+        inorder.addAll(getInorder(root.right));
+        return inorder;
+    }
+    //遍历list，修改指针
+    private TreeNode getDoubleList(ArrayList<TreeNode> inorder) {
+        if (inorder.isEmpty()) {
+            return null;
+        }
+        for (int i = 0; i < inorder.size() - 1; i++) {
+            inorder.get(i).right = inorder.get(i + 1);
+            inorder.get(i + 1).left = inorder.get(i);
+        }
+        return inorder.get(0);
+    }
+
+    public static TreeNode initNode(int deep) {
+        if (deep < 0) {
+            return null;
+        }
+        TreeNode root = new TreeNode(deep);
+        root.left = initNode(deep - 1);
+        root.right = initNode(deep - 1);
+        return root;
+    }
+
     public static void main(String[] arg) {
         Tree treeAlg = new Tree();
-        //isBST
+/*        //isBST
         int[] sequence = {3, 4, 9, 5, 12, 11, 10};
-        System.out.println("res: " + treeAlg.isBST(sequence));
-/*        int[] pre = {1,2,4,7,3,5,6,8};
+//        int[] sequence = {6,7,8,5};
+        System.out.println("res: " + treeAlg.isBST(sequence));*/
+        int[] pre = {1,2,4,7,3,5,6,8};
         int[] in = {4,7,2,1,5,3,8,6};
         TreeNode root = treeAlg.reConstructBinaryTree(pre, in);
 //        System.out.println("root: " + root);
-        System.out.println("res: " + treeAlg.PrintFromTopToBottom(root));*/
+//        System.out.println("res: " + treeAlg.PrintFromTopToBottom(root));
+        TreeNode initNode = initNode(5);
+//        System.out.println("res: " + treeAlg.FindPath(initNode, 12));
+        System.out.println("res: " + treeAlg.Convert(initNode));
     }
 }
