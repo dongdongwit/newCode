@@ -116,24 +116,24 @@ public class SortTest {
      * @param hi
      * @return
      */
-    private int partition(int []array,int lo,int hi){
+    private int partition(int []array,int lo, int hi){
         //固定的切分方式
-        int key=array[lo];
-        while(lo<hi){
+        int key = array[lo];
+        while(lo < hi){
             while(array[hi] >= key && hi > lo){//从后半部分向前扫描
                 hi--;
             }
             //后半部分小于key的值放在左边
-            array[lo]=array[hi];
+            array[lo] = array[hi];
             while(array[lo] <= key && hi > lo){//从前半部分向后扫描
                 lo++;
             }
             //前半部分大于key的值放在右边
-            array[hi]=array[lo];
+            array[hi] = array[lo];
         }
-        //此时hi已完成自减，hi左边的值都小于key，hi右边的值都大于key
-        array[hi]=key;
-        return hi;
+        //返回key所在位置的坐标
+        array[lo] = key;
+        return lo;
     }
 
     public static void main(String[] args) {
