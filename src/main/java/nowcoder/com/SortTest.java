@@ -1,5 +1,6 @@
 package nowcoder.com;
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  * 常用排序算法的实现方案
@@ -98,6 +99,28 @@ public class SortTest {
             }
         }
     }
+    // 分治法快速排序非递归
+    public void quickSortNoRe(int[] array, int low, int high) {// 传入low=0，high=array.length-1;
+        if (low >= high) {
+            return;
+        }
+        Stack<Integer> stack = new Stack<>();
+        stack.push(low);
+        stack.push(high);
+        while (! stack.isEmpty()) {
+            //栈是桶模型，先入后出
+            int end = stack.pop();
+            int start = stack.pop();
+            if (start >= end) {
+                continue;
+            }
+            int p_pos = partition(array, start, end);
+            stack.push(start);
+            stack.push(p_pos - 1);
+            stack.push(p_pos + 1);
+            stack.push(end);
+        }
+    }
 
     // 分治法快速排序
     public void quickSort(int[] array, int low, int high) {// 传入low=0，high=array.length-1;
@@ -145,7 +168,8 @@ public class SortTest {
         // st.insertionSort(array);
 //        st.quickSort(array, 0, array.length - 1);
         System.out.println("排序前：" + Arrays.toString(array));
-        st.mergeSort(array, 0, array.length - 1);
+//        st.mergeSort(array, 0, array.length - 1);
+        st.quickSortNoRe(array, 0, array.length - 1);
         System.out.println("排序后：" + Arrays.toString(array));
     }
 }

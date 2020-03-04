@@ -58,11 +58,11 @@ public class Tree {
             return true;
         }
         int rootKey = sequence[end], leftEnd = start, rightEnd = end - 1;
-        //找到root节点在序列中的位置
+        //左子树区间的所有节点值 < 根节点值,找到可能的左子区间
         while (sequence[leftEnd] < rootKey && leftEnd < end) {
             leftEnd++;
         }
-        //判断当前的右子树区间是否满足BST的特点
+        //如果上述判断成立，判断当前的右子树区间是否满足BST的特点
         for (int i = leftEnd; i < end; i++) {
             if (sequence[i] < rootKey) {
                 return false;
