@@ -142,7 +142,7 @@ public class Tree {
     public TreeNode Convert(TreeNode pRootOfTree) {
         return getDoubleList(getInorder(pRootOfTree));
     }
-    //中序遍历，在list中按遍历顺序保存
+    //中序遍历，在list中按遍历顺序保存，将二叉搜索树中序遍历的结果存为list
     private ArrayList<TreeNode> getInorder(TreeNode root) {
         ArrayList<TreeNode> inorder = new ArrayList<>();
         if (root == null) {

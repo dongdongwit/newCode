@@ -31,6 +31,8 @@ public class Find {
 
     public static void main(String[] arg) {
         int[] arr = {1,3,5,7,9,11,23,44,66};
+        String s = "asb";
+//        s
 //        System.out.println("result: " + recursionBinarySearch(arr, 11, 0, arr.length - 1));
         System.out.println("result: " + binarySearch(arr, 11, 0, arr.length - 1));
     }
