@@ -1,4 +1,4 @@
-package nowcoder.com;
+package newcoder.com;
 
 import java.util.Scanner;
 

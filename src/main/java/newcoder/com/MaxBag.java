@@ -1,4 +1,4 @@
-package nowcoder.com;
+package newcoder.com;
 
 /**
  * 0-1背包问题

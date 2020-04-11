@@ -1,4 +1,4 @@
-package nowcoder.com;
+package newcoder.com;
 
 public class Find {
     public static int recursionBinarySearch(int[] arr, int key, int low, int high) {

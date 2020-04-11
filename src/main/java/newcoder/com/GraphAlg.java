@@ -1,4 +1,4 @@
-package nowcoder.com;
+package newcoder.com;
 
 public class GraphAlg {
     /**
